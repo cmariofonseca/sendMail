@@ -22,9 +22,9 @@ export class ConnectionService {
     this.messageCollection = af.collection<Message>('messages');
     this.messages = this.messageCollection.snapshotChanges().pipe(
       map(actions => actions.map(a => {
-        const DATA = a.payload.doc.data() as Message;
+        const data = a.payload.doc.data() as Message;
         const id = a.payload.doc.id;
-        return { id, ...DATA };
+        return { id, ...data };
       }))
     );
   }
@@ -37,7 +37,7 @@ export class ConnectionService {
     this.messageCollection.add(message);
   }
 
-  deleteMessage(message: Message) {
+  deleteMessage(message) {
     this.messageDocument = this.af.doc<Message>(`messages/${message.id}`);
     /*
     *  El simbolo ${..} nos indica que haremos referencia a una variable,

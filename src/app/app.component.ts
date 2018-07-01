@@ -24,11 +24,17 @@ export class AppComponent {
     this.messages = this.cs.listMessages();
   }
 
-  sendMessage() {
+  addition(message: Message) {
     this.cs.addMessage(this.mess);
     this.mess.name = '';
+    this.mess.phone = '';
     this.mess.email = '';
     this.mess.message = '';
+    // Reestable valores vacios al formulario
+  }
+
+  delete(message: Message) {
+    this.cs.deleteMessage(message);
   }
 
 }
