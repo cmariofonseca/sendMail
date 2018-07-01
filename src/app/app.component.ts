@@ -13,6 +13,7 @@ export class AppComponent {
 
   mess: any = {
     name: '',
+    phone: '',
     email: '',
     message: ''
   };

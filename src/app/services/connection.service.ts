@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestoreCollection, AngularFirestore } from 'angularfire2/firestore';
+import {
+  AngularFirestore,
+  AngularFirestoreDocument,
+  AngularFirestoreCollection
+} from 'angularfire2/firestore';
 import { Message } from '../models/message';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -10,6 +14,7 @@ import { map } from 'rxjs/operators';
 
 export class ConnectionService {
 
+  private messageDocument: AngularFirestoreDocument<Message>;
   private messageCollection: AngularFirestoreCollection<Message>;
   messages: Observable<Message[]>;
 
@@ -17,9 +22,9 @@ export class ConnectionService {
     this.messageCollection = af.collection<Message>('messages');
     this.messages = this.messageCollection.snapshotChanges().pipe(
       map(actions => actions.map(a => {
-        const data = a.payload.doc.data() as Message;
+        const DATA = a.payload.doc.data() as Message;
         const id = a.payload.doc.id;
-        return { id, ...data };
+        return { id, ...DATA };
       }))
     );
   }
@@ -30,6 +35,16 @@ export class ConnectionService {
 
   addMessage(message: Message) {
     this.messageCollection.add(message);
+  }
+
+  deleteMessage(message: Message) {
+    this.messageDocument = this.af.doc<Message>(`messages/${message.id}`);
+    /*
+    *  El simbolo ${..} nos indica que haremos referencia a una variable,
+    *  en este caso, messages es el objeto y message.id es el par clave-valor
+    *  al que queremos apuntar, para poder eliminar
+    */
+    this.messageDocument.delete();
   }
 
 }
