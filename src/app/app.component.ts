@@ -37,4 +37,8 @@ export class AppComponent {
     this.cs.deleteMessage(message);
   }
 
+  edition(message: Message) {
+    this.cs.editMessage(this.mess);
+  }
+
 }

@@ -47,4 +47,9 @@ export class ConnectionService {
     this.messageDocument.delete();
   }
 
+  editMessage(message: Message) {
+    this.messageDocument = this.af.doc<Message>(`messages/${message.id}`);
+    this.messageDocument.update(message);
+  }
+
 }

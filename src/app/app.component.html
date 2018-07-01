@@ -1,7 +1,6 @@
 <div class="Contact">
 
   <div class="Form1">
-
     <h1>Formulario de contacto</h1>
     <form class="Form2" (ngSubmit)="addition()">
       <div class="form-group">
@@ -22,15 +21,57 @@
       </div>
       <button type="submit" class="btn btn-primary">Enviar</button>
     </form>
+  </div>
 
-    <div class="alert alert-info" role="alert" *ngFor="let message of messages | async">
-      <div class="float-right" (click)="delete(message)">
-        <i class="far fa-trash-alt"></i>
+  <div class="alert alert-info Alert" role="alert" *ngFor="let message of messages | async">
+    <div class="float-right" (click)="delete(message)">
+      <i class="far fa-trash-alt Delete"></i>
+    </div>
+    <div class="float-right" (click)="edition(message)" data-toggle="modal" data-target="#exampleModal">
+      <i class="far fa-edit Edition"></i>
+    </div>
+    <ul>
+      <li>{{ message.id }}</li>
+      <li>{{ message.name }}</li>
+      <li>{{ message.phone }}</li>
+      <li>{{ message.email }}</li>
+      <li>{{ message.message }}</li>
+    </ul>
+
+    <div class="modal fade Modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Editar mensaje con ID: {{ message.id }}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="Form1">
+              <form class="Form2" (ngSubmit)="edition()">
+                <div class="form-group">
+                  <label for="formGroupExampleInput">Corregir Nombre</label>
+                  <input name="name" [(ngModel)]="mess.name" type="text" class="form-control" id="formGroupExampleInput">
+                </div>
+                <div class="form-group">
+                  <label for="formGroupExampleInput">Corregir Teléfono</label>
+                  <input name="name" [(ngModel)]="mess.phone" type="text" class="form-control" id="formGroupExampleInput">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Corregir Dirección Email</label>
+                  <input name="email" [(ngModel)]="mess.email" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                </div>
+                <div class="form-group">
+                  <label for="exampleFormControlTextarea1">Corregir comentarios</label>
+                  <textarea name="message" [(ngModel)]="mess.message" type="text" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Guardar cambios</button>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
-      <ul>
-        <li>{{ message.id }}</li>
-        <li>{{ message.message }}</li>
-      </ul>
     </div>
 
   </div>

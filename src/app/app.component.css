@@ -1,6 +1,7 @@
 .Contact {
   width: 100%;
   display: flex;
+  flex-wrap: wrap;
   padding: 2% 5%;
 }
 
@@ -11,6 +12,26 @@
 
 .Contact .Form1 form {
   padding: 10%;
+}
+
+.Contact .Alert {
+  width: 50%;
+  margin: 1% 3%;
+}
+
+.Contact .Alert .Delete {
+  cursor: pointer;
+  margin: 0 0 0 15px;
+}
+
+.Contact .Alert .Edition {
+  cursor: pointer;
+  margin: 0 15px 0 0;
+}
+
+.Contact .Alert .Modal {
+  width: 50%;
+  margin: 0 3%;
 }
 
 /* Media queries */
