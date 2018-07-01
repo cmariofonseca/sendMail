@@ -1,0 +1,24 @@
+.Contact {
+  width: 100%;
+  display: flex;
+  padding: 2% 5%;
+}
+
+.Contact .Form1 {
+  width: 50%;
+  margin: 0 3%;
+}
+
+.Contact .Form1 form {
+  padding: 10%;
+}
+
+/* Media queries */
+@media (max-width: 767px) {
+  .Contact {
+    flex-wrap: wrap;
+  }
+  .Contact .Form1 {
+    width: 100%;
+  }
+}
