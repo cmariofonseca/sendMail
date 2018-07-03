@@ -1,6 +1,6 @@
-import { Message } from './models/message';
 import { Observable } from 'rxjs';
 import { Component } from '@angular/core';
+import { Message } from './models/message';
 import { ConnectionService } from './services/connection.service';
 
 @Component({
@@ -18,13 +18,21 @@ export class AppComponent {
     message: ''
   };
 
+  editMess: any = {
+    id: '',
+    name: '',
+    phone: '',
+    email: '',
+    message: ''
+  };
+
   messages: Observable<Message[]>;
 
   constructor(private cs: ConnectionService) {
     this.messages = this.cs.listMessages();
   }
 
-  addition(message: Message) {
+  addition() {
     this.cs.addMessage(this.mess);
     this.mess.name = '';
     this.mess.phone = '';
@@ -38,7 +46,9 @@ export class AppComponent {
   }
 
   edition(message: Message) {
-    this.cs.editMessage(this.mess);
+    this.editMess.id = message.id;
+    // Se define a cual documento particular se hará los cambios
+    this.cs.editMessage(this.editMess);
   }
 
 }

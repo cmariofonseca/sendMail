@@ -50,6 +50,7 @@ export class ConnectionService {
   editMessage(message: Message) {
     this.messageDocument = this.af.doc<Message>(`messages/${message.id}`);
     this.messageDocument.update(message);
+    console.log('id: ' + message.id, 'name: ' + message.name);
   }
 
 }
